@@ -1,0 +1,52 @@
+{
+    "name": "soundcloud",
+    "version": "0.0.1",
+    "description": "soundcloud custom client",
+    "license": "MIT",
+    "scripts": {
+        "build": "tsc",
+        "watch": "tsc -w",
+        "lint": "chcp 65001 && eslint -c .eslintrc --ext .ts ./src",
+        "start": "chcp 65001 && npm run build && electron ./.dist/main.js",
+        "dist": "chcp 65001 && npm run build && electron-builder --dir",
+        "dist-win": "chcp 65001 && npm run build && electron-builder -w nsis",
+        "dist-mac": "chcp 65001 && npm run build && electron-builder -m dmg",
+        "dist-linux-deb": "chcp 65001 && npm run build && electron-builder -l deb",
+        "dist-linux-appimage": "chcp 65001 && npm run build && electron-builder -l appimage"
+    },
+    "main": "./.dist/main.js",
+    "build": {
+        "appId": "com.javascriptjp.soundcloud",
+        "productName": "SoundCloud",
+        "asar": false,
+        "files": [
+            ".dist/**/*",
+            "static/**/*"
+        ],
+        "directories": {
+            "output": ".out"
+        },
+        "mac": {
+            "icon": "static/soundcloud-mac.icns"
+        },
+        "win": {
+            "icon": "static/soundcloud-win.ico"
+        }
+    },
+    "devDependencies": {
+        "@types/discord-rpc": "^4.0.8",
+        "@types/electron-localshortcut": "^3.1.3",
+        "@types/node": "^20.12.7",
+        "@typescript-eslint/eslint-plugin": "^7.7.0",
+        "@typescript-eslint/parser": "^7.7.0",
+        "electron": "^30.0.0",
+        "electron-builder": "^24.13.3",
+        "eslint": "^8.57.0",
+        "typescript": "^5.4.5"
+    },
+    "dependencies": {
+        "discord-rpc": "^4.0.1",
+        "electron-localshortcut": "^3.2.1",
+        "electron-store": "^8.2.0"
+    }
+}
