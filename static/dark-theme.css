@@ -64,9 +64,6 @@ a.playbackSoundBadge__lightLink:focus {
     color: #f50 !important;
 }
 .sc-button-small.sc-button-icon:not(.sc-button-stretch-icon),
-.sc-button-small.sc-button-responsive:not(.sc-button-stretch-icon) {
-    background-color: #000 !important;
-}
 .sound__soundActions {
     background-color: transparent !important;
 }
@@ -707,4 +704,54 @@ a.sc-link-light {
 
 :root {
     color-scheme: dark;
+}
+
+.sc-classic .mixedSelectionModule {
+    border-bottom: 1px solid #464646 !important;
+    margin-bottom: 34px;
+}
+
+.tileGallery__sliderButton.tileGallery__slideForwardButton.sc-button.sc-button-small.sc-button-icon {
+    border: 1px solid #464646 !important;
+    background-color: #0b0c0c !important;
+}
+.tileGallery__sliderButton.tileGallery__slideBackwardButton.sc-button.sc-button-small.sc-button-icon {
+    border: 1px solid #464646 !important;
+    background-color: #0b0c0c !important;
+}
+
+.sc-button-small.sc-button-icon:not(.sc-button-stretch-icon), .sc-button-small.sc-button-responsive:not(.sc-button-stretch-icon) {
+    background-color: transparent !important;
+    border: 1px solid rgb(70, 70, 70)!important;
+}
+
+.userBadge__actions {
+    border: 1px solid #464646 !important;
+}
+
+.userBadge__actions>.sc-button-follow.sc-button.sc-button-small.sc-button-responsive.sc-button-secondary {
+    background-color: #000 !important;
+}
+
+.playbackSoundBadge__actions>.sc-button-like.playbackSoundBadge__like.sc-button-secondary.sc-mr-1x.sc-button.sc-button-small.sc-button-icon.sc-button-responsiv{
+    border: none !important;
+}
+
+.playbackSoundBadge__showQueue>.sc-button-small.sc-button-icon:not(.sc-button-stretch-icon), .sc-button-small.sc-button-responsive:not(.sc-button-stretch-icon){
+    border: none !important;
+}
+
+.queue__clear.sc-button.sc-button-medium.sc-text-h4.sc-mr-1x {
+    background-color: transparent !important;
+}
+.queue__hide.sc-button.sc-button-nostyle.sc-ir {
+    background-color: transparent !important;
+}
+
+.sc-classic .queue__panel {
+    border-bottom: 1px solid #464646;
+}
+
+.sc-classic .m-light .headerMenu__link:focus, .sc-classic .m-light .headerMenu__link:hover {
+    background-color: #0b0c0c !important;
 }

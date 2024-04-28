@@ -1,6 +1,6 @@
 {
     "name": "soundcloud",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "description": "soundcloud custom client",
     "license": "MIT",
     "author": {
@@ -9,10 +9,8 @@
         "email": "71214511+javascriptjp@users.noreply.github.com"
     },
     "scripts": {
-        "build": "tsc",
-        "watch": "tsc -w",
-        "lint": "eslint -c .eslintrc --ext .ts ./src",
-        "start": "npm run build && electron ./.dist/main.js",
+        "build": "node script/build && tsc",
+        "dev": "npm run build && cross-env NODE_ENV=development electron ./.dist/main.js",
         "build-electron": "npm run build && electron-builder --publish always"
     },
     "main": "./.dist/main.js",

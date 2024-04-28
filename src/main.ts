@@ -1,5 +1,6 @@
-import { app, BrowserWindow, Menu, ipcMain } from "electron"
-const { autoUpdater } = require("electron-updater")
+import { app, BrowserWindow, Menu } from "electron"
+
+const isDevelopment = !process.env.NODE_ENV || process.env.NODE_ENV === "development"
 
 Menu.setApplicationMenu(null)
 let mainWindow: BrowserWindow | null
@@ -19,27 +20,28 @@ async function initApp() {
         width: 1280,
         height: 720
     })
+    mainWindow.webContents.on("did-start-loading", () => {
+        if (!mainWindow) return
+        mainWindow.webContents.insertCSS(DarkModeCSS).then((value) => {
+            injectedCss = value
+        })
+    })
     mainWindow.webContents.on("did-finish-load", async () => {
-        if (store.get("darkMode")) {
-            if (mainWindow) {
-                await mainWindow.webContents.insertCSS(DarkModeCSS).then((value) => {
-                    injectedCss = value
-                })
-            }
+        if (!mainWindow) return
+        if (isDevelopment) {
+            console.log("development mode enabled")
+            mainWindow.webContents.openDevTools()
         }
-        if (!mainInterval) {
+        if (!mainInterval && !isDevelopment) {
             mainInterval = setInterval(async () => {
                 if (!mainWindow) return
                 const trackInfo = await mainWindow.webContents.executeJavaScript(getTracks);
                 rpc.setActivity(trackInfo)
-            }, 10000)
+            }, 5000)
         }
     })
     mainWindow.on("close", () => {
-        if (mainInterval) {
-            clearInterval(mainInterval)
-            mainInterval = undefined
-        }
+        if (mainInterval) clearInterval(mainInterval)
     })
     mainWindow.webContents.on("before-input-event", (event, input) => {
         if (input.isAutoRepeat) return
@@ -64,11 +66,10 @@ async function initApp() {
     })
     mainWindow.loadURL("https://soundcloud.com/discover")
 }
-ipcMain.on("restart_app", () => {
-    autoUpdater.quitAndInstall();
-});
-app.on("ready", () => {
+
+app.on("ready", async () => {
     initApp()
-    autoUpdater.checkForUpdatesAndNotify()
+    const { autoUpdater } = await import("electron-updater")
+    if (!isDevelopment) autoUpdater.checkForUpdatesAndNotify()
 })
 app.on("window-all-closed", () => { if (process.platform !== "darwin") app.quit() })

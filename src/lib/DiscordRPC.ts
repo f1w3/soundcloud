@@ -29,6 +29,7 @@ export class DiscordRPC {
             smallImageKey: "soundcloud",
             smallImageText: "on SoundCloud",
             startTimestamp: undefined,
+            endTimestamp: undefined,
             buttons: [
                 {
                     label: "Listen music",
