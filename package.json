@@ -11,9 +11,9 @@
     "scripts": {
         "build": "tsc",
         "watch": "tsc -w",
-        "lint": "chcp 65001 && eslint -c .eslintrc --ext .ts ./src",
-        "start": "chcp 65001 && npm run build && electron ./.dist/main.js",
-        "build-electron": "chcp 65001 && npm run build && electron-builder --publish always"
+        "lint": "eslint -c .eslintrc --ext .ts ./src",
+        "start": "npm run build && electron ./.dist/main.js",
+        "build-electron": "npm run build && electron-builder --publish always"
     },
     "main": "./.dist/main.js",
     "build": {
