@@ -1,11 +1,11 @@
-import { app, BrowserWindow, Menu } from "electron"
+import { app, BrowserWindow, Menu, dialog } from "electron"
 
 const isDevelopment = process.env.NODE_ENV == "development"
 
 Menu.setApplicationMenu(null)
 let mainWindow: BrowserWindow | null
 let mainInterval: NodeJS.Timeout | undefined
-let injectedCss: string = "0"
+let insertedList: string[] = []
 
 async function initApp() {
     const { DiscordRPC } = await import("./lib/DiscordRPC")
@@ -22,9 +22,7 @@ async function initApp() {
     })
     mainWindow.webContents.on("did-start-loading", () => {
         if (!mainWindow || !store.get("darkMode")) return
-        mainWindow.webContents.insertCSS(DarkModeCSS).then((value) => {
-            injectedCss = value
-        })
+        mainWindow.webContents.insertCSS(DarkModeCSS).then(value => insertedList.push(value))
     })
     mainWindow.webContents.on("did-finish-load", async () => {
         if (!mainWindow) return
@@ -49,11 +47,10 @@ async function initApp() {
             if (!mainWindow) return
             store.set("darkMode", !(store.get("darkMode")))
             if (store.get("darkMode")) {
-                mainWindow.webContents.insertCSS(DarkModeCSS).then((value) => {
-                    injectedCss = value
-                })
+                mainWindow.webContents.insertCSS(DarkModeCSS).then(value => insertedList.push(value))
             } else {
-                mainWindow.webContents.removeInsertedCSS(injectedCss)
+                insertedList.forEach(css => mainWindow?.webContents.removeInsertedCSS(css))
+                insertedList = []
             }
             event.preventDefault()
         } else if (input.key == "F5") {
@@ -67,6 +64,31 @@ async function initApp() {
 app.on("ready", async () => {
     initApp()
     const { autoUpdater } = await import("electron-updater")
-    if (!isDevelopment) autoUpdater.checkForUpdatesAndNotify()
+    autoUpdater.checkForUpdates()
+    autoUpdater.on("update-downloaded", async () => {
+        const index = await dialog.showMessageBox({
+            message: "アップデートあり",
+            detail: "再起動してインストールできます。",
+            buttons: ["再起動", "後で"]
+        })
+        if (index.response === 0) {
+            autoUpdater.quitAndInstall();
+        }
+    })
+    autoUpdater.on("update-downloaded", (event) => {
+        dialog.showMessageBox({
+            type: 'info',
+            buttons: ['今すぐ再起動', 'また後で再起動'],
+            title: "自動アップデート君 ^. .^",
+            message: `ダウンロード後のバージョン: v${event.version}`,
+            detail: 'アップデートの準備が完了しました！再起動しますか？'
+        }).then((returnValue) => {
+            if (returnValue.response === 0) autoUpdater.quitAndInstall()
+        })
+    })
+    autoUpdater.on('error', (message) => {
+        console.error('There was a problem updating the application')
+        console.error(message)
+    })
 })
 app.on("window-all-closed", () => { if (process.platform !== "darwin") app.quit() })
