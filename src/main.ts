@@ -70,11 +70,11 @@ app.on("ready", async () => {
     }, 60000 * 15)
     autoUpdater.on("update-downloaded", (event) => {
         dialog.showMessageBox({
-            type: 'info',
+            type: "question",
             buttons: ['今すぐ再起動', 'また後で再起動'],
             title: "自動アップデート君 ^. .^",
             message: `ダウンロード後のバージョン: v${event.version}`,
-            detail: 'アップデートの準備が完了しました！再起動しますか？'
+            detail: 'アップデートの準備が完了しました！再起動しますか？',
         }).then((returnValue) => {
             if (returnValue.response === 0) autoUpdater.quitAndInstall()
         })
