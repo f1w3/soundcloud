@@ -65,16 +65,9 @@ app.on("ready", async () => {
     initApp()
     const { autoUpdater } = await import("electron-updater")
     autoUpdater.checkForUpdates()
-    autoUpdater.on("update-downloaded", async () => {
-        const index = await dialog.showMessageBox({
-            message: "アップデートあり",
-            detail: "再起動してインストールできます。",
-            buttons: ["再起動", "後で"]
-        })
-        if (index.response === 0) {
-            autoUpdater.quitAndInstall();
-        }
-    })
+    setInterval(() => {
+        autoUpdater.checkForUpdates()
+    }, 60000 * 15)
     autoUpdater.on("update-downloaded", (event) => {
         dialog.showMessageBox({
             type: 'info',
