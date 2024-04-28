@@ -3,23 +3,24 @@
     "version": "0.0.1",
     "description": "soundcloud custom client",
     "license": "MIT",
+    "author": {
+        "name": "javascriptjp",
+        "url": "https://github.com/javascriptjp",
+        "email": "71214511+javascriptjp@users.noreply.github.com"
+    },
     "scripts": {
         "build": "tsc",
         "watch": "tsc -w",
         "lint": "chcp 65001 && eslint -c .eslintrc --ext .ts ./src",
         "start": "chcp 65001 && npm run build && electron ./.dist/main.js",
         "dist": "chcp 65001 && npm run build && electron-builder --dir",
-        "dist-win": "chcp 65001 && npm run build && electron-builder -w nsis",
-        "dist-mac": "chcp 65001 && npm run build && electron-builder -m dmg",
-        "dist-linux-deb": "chcp 65001 && npm run build && electron-builder -l deb",
-        "dist-linux-appimage": "chcp 65001 && npm run build && electron-builder -l appimage"
+        "dist-win": "chcp 65001 && npm run build && electron-builder -w nsis --publish always"
     },
     "main": "./.dist/main.js",
     "build": {
         "appId": "com.javascriptjp.soundcloud",
         "productName": "SoundCloud",
         "asar": false,
-        "useZip": true,
         "files": [
             ".dist/**/*",
             "static/**/*"
@@ -32,6 +33,11 @@
         },
         "win": {
             "icon": "static/soundcloud-win.ico"
+        },
+        "publish": {
+            "provider": "github",
+            "owner": "javascriptjp",
+            "repo": "soundcloud"
         }
     },
     "devDependencies": {

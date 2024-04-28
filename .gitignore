@@ -3,3 +3,4 @@ node_modules
 .out
 tsc
 **/.DS_Store
+.env
