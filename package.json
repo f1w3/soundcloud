@@ -1,6 +1,6 @@
 {
     "name": "soundcloud",
-    "version": "1.0.5",
+    "version": "1.0.6",
     "description": "soundcloud custom client",
     "license": "MIT",
     "author": {
@@ -11,7 +11,9 @@
     "scripts": {
         "build": "node script/build && tsc",
         "dev": "npm run build && cross-env NODE_ENV=development electron ./.dist/main.js",
-        "build-electron": "npm run build && electron-builder --publish always"
+        "start": "npm run build && electron ./.dist/main.js",
+        "build-electron": "npm run build && electron-builder --publish always",
+        "build-dev": "npm run build && electron-builder"
     },
     "main": "./.dist/main.js",
     "build": {

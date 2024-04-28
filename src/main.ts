@@ -1,6 +1,6 @@
 import { app, BrowserWindow, Menu } from "electron"
 
-const isDevelopment = false
+const isDevelopment = process.env.NODE_ENV == "development"
 
 Menu.setApplicationMenu(null)
 let mainWindow: BrowserWindow | null
@@ -21,7 +21,7 @@ async function initApp() {
         height: 720
     })
     mainWindow.webContents.on("did-start-loading", () => {
-        if (!mainWindow) return
+        if (!mainWindow || !store.get("darkMode")) return
         mainWindow.webContents.insertCSS(DarkModeCSS).then((value) => {
             injectedCss = value
         })
@@ -46,17 +46,14 @@ async function initApp() {
     mainWindow.webContents.on("before-input-event", (event, input) => {
         if (input.isAutoRepeat) return
         if (input.key == "F1") {
+            if (!mainWindow) return
             store.set("darkMode", !(store.get("darkMode")))
             if (store.get("darkMode")) {
-                if (mainWindow) {
-                    mainWindow.webContents.insertCSS(DarkModeCSS).then((value) => {
-                        injectedCss = value
-                    })
-                }
+                mainWindow.webContents.insertCSS(DarkModeCSS).then((value) => {
+                    injectedCss = value
+                })
             } else {
-                if (mainWindow) {
-                    mainWindow.webContents.removeInsertedCSS(injectedCss)
-                }
+                mainWindow.webContents.removeInsertedCSS(injectedCss)
             }
             event.preventDefault()
         } else if (input.key == "F5") {
