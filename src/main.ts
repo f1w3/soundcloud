@@ -1,6 +1,6 @@
 import { app, BrowserWindow, Menu } from "electron"
 
-const isDevelopment = !process.env.NODE_ENV || process.env.NODE_ENV === "development"
+const isDevelopment = false
 
 Menu.setApplicationMenu(null)
 let mainWindow: BrowserWindow | null
