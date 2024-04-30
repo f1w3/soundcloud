@@ -1,6 +1,6 @@
 {
     "name": "soundcloud",
-    "version": "1.0.12",
+    "version": "1.0.13",
     "description": "soundcloud custom client",
     "license": "MIT",
     "author": {
@@ -21,8 +21,7 @@
         "productName": "SoundCloud",
         "asar": true,
         "files": [
-            ".dist/**/*",
-            "static/**/*"
+            ".dist/**/*"
         ],
         "directories": {
             "output": ".out"
@@ -30,7 +29,7 @@
         "win": {
             "target": "nsis",
             "artifactName": "${productName}-${version}-${os}-${arch}.${ext}",
-            "icon": "static/soundcloud-win.ico"
+            "icon": "src/static/soundcloud-win.ico"
         },
         "publish": {
             "provider": "github",
