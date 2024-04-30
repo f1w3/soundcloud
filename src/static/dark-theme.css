@@ -755,3 +755,20 @@ a.sc-link-light {
 .sc-classic .m-light .headerMenu__link:focus, .sc-classic .m-light .headerMenu__link:hover {
     background-color: #0b0c0c !important;
 }
+
+.sc-button-medium.sc-button-copylink::before {
+    filter: invert(100%) !important;
+}
+
+.sc-button-follow.sc-button-small::before {
+    filter: invert(100%) !important;
+}
+
+.sc-ministats.sc-ministats-small.sc-link-secondary.sc-ministats-sounds {
+    filter: invert(100%) !important;
+}
+
+.sc-classic .localeSelectorContent {
+    background-color: #0b0c0c !important;
+    overflow: hidden;
+}

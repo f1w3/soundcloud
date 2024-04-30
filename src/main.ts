@@ -1,6 +1,9 @@
-import { app, BrowserWindow, Menu, dialog } from "electron"
+import { app, BrowserWindow, Menu, dialog, shell } from "electron"
 
 const isDevelopment = process.env.NODE_ENV == "development"
+
+const gotTheLock = app.requestSingleInstanceLock()
+if (!gotTheLock) app.quit()
 
 Menu.setApplicationMenu(null)
 let mainWindow: BrowserWindow | null
@@ -15,22 +18,30 @@ async function initApp() {
 
     const rpc = new DiscordRPC("1231582371581657160")
     const store = new Store<Record<string, boolean>>()
+    const isDarkMode = store.get("darkMode")
 
     mainWindow = new BrowserWindow({
         width: 1280,
-        height: 720
+        height: 720,
+        backgroundColor: isDarkMode ? "#0b0c0c" : "#ffffff",
+        "show": false,
+        webPreferences: {
+            sandbox: true
+        }
     })
-    mainWindow.webContents.on("did-start-loading", () => {
-        if (!mainWindow || !store.get("darkMode")) return
-        mainWindow.webContents.insertCSS(DarkModeCSS).then(value => insertedList.push(value))
+    mainWindow.webContents.setWindowOpenHandler(({ url }) => {
+        shell.openExternal(url)
+        return { action: "deny" }
     })
+    mainWindow.once('ready-to-show', () => mainWindow?.show())
+    mainWindow.webContents.on("did-start-loading", () => { if (mainWindow && store.get("darkMode")) mainWindow.webContents.insertCSS(DarkModeCSS).then(value => insertedList.push(value)) })
     mainWindow.webContents.on("did-finish-load", async () => {
         if (!mainWindow) return
         if (isDevelopment) {
             console.log("development mode enabled")
             mainWindow.webContents.openDevTools()
         }
-        if (!mainInterval && !isDevelopment) {
+        if (!mainInterval) {
             mainInterval = setInterval(async () => {
                 if (!mainWindow) return
                 const trackInfo = await mainWindow.webContents.executeJavaScript(getTracks);
@@ -38,9 +49,7 @@ async function initApp() {
             }, 5000)
         }
     })
-    mainWindow.on("close", () => {
-        if (mainInterval) clearInterval(mainInterval)
-    })
+    mainWindow.on("close", () => { if (mainInterval) clearInterval(mainInterval) })
     mainWindow.webContents.on("before-input-event", (event, input) => {
         if (input.isAutoRepeat) return
         if (input.key == "F1") {
@@ -59,15 +68,12 @@ async function initApp() {
         }
     })
     mainWindow.loadURL("https://soundcloud.com/discover")
+    
 }
 
 app.on("ready", async () => {
     initApp()
     const { autoUpdater } = await import("electron-updater")
-    autoUpdater.checkForUpdates()
-    setInterval(() => {
-        autoUpdater.checkForUpdates()
-    }, 60000 * 15)
     autoUpdater.on("update-downloaded", (event) => {
         dialog.showMessageBox({
             type: "question",
@@ -79,9 +85,13 @@ app.on("ready", async () => {
             if (returnValue.response === 0) autoUpdater.quitAndInstall()
         })
     })
-    autoUpdater.on('error', (message) => {
-        console.error('There was a problem updating the application')
-        console.error(message)
-    })
+    autoUpdater.on('error', err => console.log(err));
+    autoUpdater.on('checking-for-update', () => console.log('checking-for-update'))
+    autoUpdater.on('update-available', () => console.log('update-available'))
+    autoUpdater.on('update-not-available', () => console.log('update-not-available'))
+    autoUpdater.checkForUpdates()
+    setInterval(() => {
+        autoUpdater.checkForUpdates()
+    }, 60000 * 15)
 })
 app.on("window-all-closed", () => { if (process.platform !== "darwin") app.quit() })
