@@ -1,6 +1,6 @@
 {
     "name": "soundcloud",
-    "version": "1.0.13",
+    "version": "1.0.14",
     "description": "soundcloud custom client",
     "license": "MIT",
     "author": {
@@ -9,11 +9,11 @@
         "email": "71214511+javascriptjp@users.noreply.github.com"
     },
     "scripts": {
-        "build": "node script/build && tsc",
-        "dev": "npm run build && cross-env NODE_ENV=development electron ./.dist/main.js",
-        "start": "npm run build && electron ./.dist/main.js",
-        "build-electron": "npm run build && electron-builder --publish always",
-        "build-dev": "npm run build && electron-builder"
+        "build": "webpack --mode production",
+        "watch": "webpack -w --mode development",
+        "dev": "chcp 65001 && electron ./.dist/main.js",
+        "build:dev": "npm run build && electron-builder",
+        "build:electron": "npm run build && electron-builder --publish always"
     },
     "main": "./.dist/main.js",
     "build": {
@@ -21,7 +21,8 @@
         "productName": "SoundCloud",
         "asar": true,
         "files": [
-            ".dist/**/*"
+            ".dist/**/*",
+            "static/**/*"
         ],
         "directories": {
             "output": ".out"
@@ -29,7 +30,7 @@
         "win": {
             "target": "nsis",
             "artifactName": "${productName}-${version}-${os}-${arch}.${ext}",
-            "icon": "src/static/soundcloud-win.ico"
+            "icon": "static/soundcloud-win.ico"
         },
         "publish": {
             "provider": "github",
@@ -39,14 +40,22 @@
     },
     "devDependencies": {
         "@types/discord-rpc": "^4.0.8",
-        "@types/electron-localshortcut": "^3.1.3",
-        "@types/node": "^20.12.7",
-        "@typescript-eslint/eslint-plugin": "^7.7.0",
-        "@typescript-eslint/parser": "^7.7.0",
-        "electron": "^30.0.0",
+        "@types/node": "^20.12.11",
+        "@types/webpack": "^5.28.5",
+        "@typescript-eslint/eslint-plugin": "^7.8.0",
+        "@typescript-eslint/parser": "^7.8.0",
+        "electron": "^30.0.3",
         "electron-builder": "^24.13.3",
-        "eslint": "^8.57.0",
-        "typescript": "^5.4.5"
+        "eslint": "^8.56.0",
+        "eslint-config-prettier": "^9.1.0",
+        "json-loader": "^0.5.7",
+        "prettier": "^3.2.5",
+        "ts-loader": "^9.5.1",
+        "ts-node": "^10.9.2",
+        "typescript": "^5.4.5",
+        "webpack": "^5.91.0",
+        "webpack-cli": "^5.1.4",
+        "webpack-shell-plugin-next": "^2.3.1"
     },
     "dependencies": {
         "discord-rpc": "^4.0.1",

@@ -170,9 +170,6 @@ input {
 .sc-button-medium.sc-button-more:before {
     filter: invert(100%) !important;
 }
-.modal__modal {
-    background: #111214 !important;
-}
 .modal.modalWhiteout {
     background-color: rgba(1, 1, 1, 0.9) !important;
 }
@@ -720,24 +717,33 @@ a.sc-link-light {
     background-color: #0b0c0c !important;
 }
 
-.sc-button-small.sc-button-icon:not(.sc-button-stretch-icon), .sc-button-small.sc-button-responsive:not(.sc-button-stretch-icon) {
+.tileGallery__sliderButton.tileGallery__slideBackwardButton.sc-button.sc-button-small.sc-button-icon::after,
+.tileGallery__sliderButton.tileGallery__slideForwardButton.sc-button.sc-button-small.sc-button-icon::after {
+    filter: invert(1);
+}
+
+.sc-button-small.sc-button-icon:not(.sc-button-stretch-icon),
+.sc-button-small.sc-button-responsive:not(.sc-button-stretch-icon) {
     background-color: transparent !important;
-    border: 1px solid rgb(70, 70, 70)!important;
 }
 
 .userBadge__actions {
     border: 1px solid #464646 !important;
 }
 
-.userBadge__actions>.sc-button-follow.sc-button.sc-button-small.sc-button-responsive.sc-button-secondary {
+.userBadge__actions
+    > .sc-button-follow.sc-button.sc-button-small.sc-button-responsive.sc-button-secondary {
     background-color: #000 !important;
 }
 
-.playbackSoundBadge__actions>.sc-button-like.playbackSoundBadge__like.sc-button-secondary.sc-mr-1x.sc-button.sc-button-small.sc-button-icon.sc-button-responsiv{
+.playbackSoundBadge__actions
+    > .sc-button-like.playbackSoundBadge__like.sc-button-secondary.sc-mr-1x.sc-button.sc-button-small.sc-button-icon.sc-button-responsiv {
     border: none !important;
 }
 
-.playbackSoundBadge__showQueue>.sc-button-small.sc-button-icon:not(.sc-button-stretch-icon), .sc-button-small.sc-button-responsive:not(.sc-button-stretch-icon){
+.playbackSoundBadge__showQueue
+    > .sc-button-small.sc-button-icon:not(.sc-button-stretch-icon),
+.sc-button-small.sc-button-responsive:not(.sc-button-stretch-icon) {
     border: none !important;
 }
 
@@ -752,12 +758,17 @@ a.sc-link-light {
     border-bottom: 1px solid #464646;
 }
 
-.sc-classic .m-light .headerMenu__link:focus, .sc-classic .m-light .headerMenu__link:hover {
+.sc-classic .m-light .headerMenu__link:focus,
+.sc-classic .m-light .headerMenu__link:hover {
     background-color: #0b0c0c !important;
 }
 
 .sc-button-medium.sc-button-copylink::before {
     filter: invert(100%) !important;
+}
+
+.sc-button-group.sc-button-group-small .sc-button-small.sc-button-share:before {
+    filter: invert(0) !important;
 }
 
 .sc-button-follow.sc-button-small::before {
@@ -771,4 +782,29 @@ a.sc-link-light {
 .sc-classic .localeSelectorContent {
     background-color: #0b0c0c !important;
     overflow: hidden;
+}
+
+.commentItem__likeButton {
+    background: transparent !important;
+}
+
+.playableTile__actions .playableTile__actionWrapper .sc-button-follow::before {
+    filter: invert(0) !important;
+}
+
+/*temp*/
+.vertically-centered {
+    background-color: #111214 !important;
+}
+
+.connect-form {
+    background-color: #111214 !important;
+}
+
+.auth-method-separator {
+    color: white !important;
+}
+
+.modal__modal {
+    background-color: white !important;
 }

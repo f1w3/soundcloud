@@ -1,7 +1,15 @@
 import { Client } from "discord-rpc"
 import { Track } from "../types/track"
-import { truncateString } from "./TruncateString"
+import { truncateString } from "./truncateString"
 
+/**
+ * Provides a Discord Rich Presence integration for displaying the currently playing track information.
+ *
+ * The `DiscordRPC` class manages the connection to the Discord RPC client and sets the activity
+ * information to be displayed, including the track title, artist, artwork, and a link to listen to the track.
+ *
+ * @param clientId - The client ID to use for logging in to the Discord RPC client.
+ */
 export class DiscordRPC {
     rpc: Client;
     /**
@@ -15,12 +23,18 @@ export class DiscordRPC {
         this.rpc = new Client({ transport: "ipc" });
         this.rpc.login({ clientId: clientId }).catch(console.error);
     }
+    /**
+     * Sets the Discord Rich Presence activity with information about the currently playing track.
+     *
+     * @param trackInfo - A JSON string containing information about the currently playing track.
+     * @returns Void
+     */
     setActivity(trackInfo: string) {
         if (trackInfo == "undefined") {
-            this.rpc.clearActivity()
-            return
+            this.rpc.clearActivity();
+            return;
         }
-        const track: Track = JSON.parse(trackInfo)
+        const track: Track = JSON.parse(trackInfo);
         this.rpc.setActivity({
             details: truncateString(track.title, 128),
             state: `by ${track.author}`,
@@ -33,9 +47,9 @@ export class DiscordRPC {
             buttons: [
                 {
                     label: "Listen music",
-                    url: track.url
-                }
-            ]
-        })
+                    url: track.url,
+                },
+            ],
+        });
     }
 }
