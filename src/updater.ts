@@ -1,11 +1,12 @@
 import { dialog } from "electron"
 import { autoUpdater } from "electron-updater"
 
-export class AppUpdater {
+class AppUpdater {
     interval: NodeJS.Timeout | undefined
     value: number = 60000 * 15
 
     constructor() {
+        console.log("init updater")
         autoUpdater.on("update-downloaded", (event) => {
             dialog.showMessageBox({
                 type: "question",
@@ -27,3 +28,5 @@ export class AppUpdater {
         }, this.value)
     }
 }
+
+export const updater = new AppUpdater()

@@ -7,10 +7,11 @@
         "esModuleInterop": true,
         "outDir": ".out/typescript",
         "resolveJsonModule": true,
+        "allowImportingTsExtensions": true,
+        "noEmit": true,
         "baseUrl": "src/",
         "paths": {
             "@/*": ["*"],
-            "@instances/*": ["instances/*"],
             "@locales/*": ["i18n/locales/*"]
         }
     },

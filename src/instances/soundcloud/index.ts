@@ -4,20 +4,19 @@ import Store from "electron-store";
 import { Instance } from "@/instances/instance";
 import DarkModeCSS from "@/theme/dark";
 import { getTracks } from "@/lib/getInfo";
-import { DiscordRPC } from "@/lib/discord";
 
-export class SoundCloud extends Instance {
+import { discord } from "@/discord";
+class SoundCloud extends Instance {
     interval: NodeJS.Timeout | undefined
     insertedList: string[] = []
     constructor(name: string, options?: BrowserWindowConstructorOptions) {
-        const rpc = new DiscordRPC("1231582371581657160")
-        const store = new Store<Record<string, boolean>>()
-        
+        const store = new Store()
+
         super(name, {
             ...options,
             show: false,
-            width: 1280,
-            height: 720,
+            width: 1070,
+            height: 750,
             backgroundColor: store.get("darkMode") ? "#0b0c0c" : "#ffffff",
         });
 
@@ -65,7 +64,11 @@ export class SoundCloud extends Instance {
                 this.interval = setInterval(async () => {
                     if (!this.window) return
                     const trackInfo = await this.window.webContents.executeJavaScript(getTracks);
-                    rpc.setActivity(trackInfo)
+                    if (trackInfo.trim() == "undefined") {
+                        discord.clear()
+                        return;
+                    }
+                    discord.set(JSON.parse(trackInfo))
                 }, 5000)
             }
         })
@@ -113,3 +116,5 @@ export class SoundCloud extends Instance {
         this.window.loadURL("https://soundcloud.com/discover")
     }
 }
+
+export const soundcloud = new SoundCloud("soundcloud")

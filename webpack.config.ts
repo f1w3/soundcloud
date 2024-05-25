@@ -24,7 +24,6 @@ const config: Configuration = {
     resolve: {
         alias: {
             '@': path.resolve(__dirname, 'src/'),
-            '@instances': path.resolve(__dirname, 'src/instances'),
             '@locales': path.resolve(__dirname, 'src/i18n/locales/'),
         },
         extensions: [
@@ -34,13 +33,12 @@ const config: Configuration = {
     module: {
         rules: [
             {
+                // ローダーの処理対象ファイル
                 test: /\.ts$/,
-                use: {
-                    loader: 'ts-loader',
-                    options: {
-                        configFile: path.resolve(__dirname, 'tsconfig.json'),
-                    },
-                }
+                // 利用するローダー
+                use: 'babel-loader',
+                // ローダーの処理対象から外すディレクトリ
+                exclude: /node_modules/
             },
             {
                 test: /\.json$/,
@@ -52,12 +50,12 @@ const config: Configuration = {
     plugins: [
         new WebPackShellPlugin({
             onBuildStart: {
-                scripts: ['node script/build'],
+                scripts: ['node script/clear.mjs && node --no-warnings=ExperimentalWarning script/build.mjs'],
                 blocking: true,
                 parallel: false
             },
             onDoneWatch: {
-                scripts: ['node script/build'],
+                scripts: ['node --no-warnings=ExperimentalWarning script/build.mjs'],
                 blocking: true,
                 parallel: false
             }

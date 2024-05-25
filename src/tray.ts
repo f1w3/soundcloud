@@ -1,9 +1,11 @@
-import { app, Menu, dialog, NativeImage, Tray, BrowserWindow } from "electron"
+import { app, Menu, dialog, Tray } from "electron"
+import { soundcloud } from "./instances/soundcloud"
+import { trayIcon } from "./icons"
 
-export class AppTray {
+class AppTray {
     tray: Tray | undefined
 
-    constructor(trayIcon: NativeImage, mainWindow: BrowserWindow) {
+    constructor() {
         this.tray = new Tray(trayIcon)
         const contextMenu = Menu.buildFromTemplate([
             {
@@ -30,8 +32,10 @@ export class AppTray {
         ])
         this.tray.setToolTip("SoundCloud")
         this.tray.addListener("double-click", () => {
-            if (mainWindow) mainWindow.show()
+            if (soundcloud.window) soundcloud.window.show()
         })
         this.tray.setContextMenu(contextMenu)
     }
 }
+
+export const appTray = new AppTray()

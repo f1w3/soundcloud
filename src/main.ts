@@ -1,21 +1,22 @@
-import { app, Menu, /*nativeImage*/ } from "electron"
-//import type { BrowserWindow } from "electron"
-//import path from "path"
-import { SoundCloud } from "@/instances/soundcloud/index"
-//import { AppTray } from "@/tray"
-import { AppUpdater } from "@/updater"
+import "./lib/console"
+
+import { app, Menu } from "electron" 
+import "@/updater"
+import { discord } from "@/discord"
 //import { loadI18n } from "@/i18n/loader"
 
-//const trayIcon = nativeImage.createFromPath(path.join(__dirname, "../static/soundcloud.png"))
 const gotTheLock = app.requestSingleInstanceLock()
 if (!gotTheLock) app.quit()
 Menu.setApplicationMenu(null)
 
 app.on("ready", async () => {
-    //const i18n = await loadI18n(app.getLocale());
-    /*const soundcloud = */new SoundCloud("soundcloud")
-    ///*const tray = */new AppTray(trayIcon, soundcloud.window as BrowserWindow)
-    /*const updater = */new AppUpdater()
+    import("@/instances/soundcloud/index.ts")
+    //import("@/tray.ts")
+})
+
+app.on("before-quit", () => {
+    discord.clear()
+    
 })
 
 app.on("window-all-closed", () => {

@@ -1,0 +1,3 @@
+{
+    "reject": ["electron-store", "eslint", "utf-8-validate"]
+}

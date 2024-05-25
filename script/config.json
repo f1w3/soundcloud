@@ -1,0 +1,15 @@
+{
+    "license": "./src/license/licenses.json",
+    "theme": {
+        "dark": {
+            "input": "./static/dark-theme.css",
+            "output": "./src/theme/dark.ts"
+        }
+    },
+    "scripts": {
+        "getInfo": {
+            "input": "./static/get-trackinfo.js",
+            "output": "./src/lib/getInfo.ts"
+        }
+    }
+}

@@ -1,17 +1,8 @@
 import scheme from "@locales/scheme.json"
-
-import defaultLocale from '@locales/default.json';
-import jaLocale from '@locales/ja.locale.json';
-
 import type { I18n, Translations } from '@/i18n/i18n';
 import { createI18n, createI18nKeys } from '@/i18n/i18n';
 
-type TranslationsList = { [key: string]: Translations; }
-
-const locales: TranslationsList = {
-    "default": defaultLocale,
-    "ja": jaLocale,
-};
+import { locales } from "./locales";
 
 export const key = createI18nKeys(scheme)
 
