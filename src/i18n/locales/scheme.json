@@ -1,3 +1,22 @@
 {
-    "test": "string"
+  "_": "string",
+  "updater": {
+    "question": {
+      "restartnow": "string",
+      "restartlater": "string"
+    },
+    "title": "string",
+    "message": "string",
+    "detail": "string"
+  },
+  "debug": {
+    "init": {
+      "app": "string",
+      "soundcloud": "string",
+      "i18n": "string",
+      "discord": "string",
+      "tray": "string",
+      "updater": "string"
+    }
+  }
 }

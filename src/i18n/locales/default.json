@@ -1,3 +1,23 @@
 {
-    "test": "test message"
+    "_": "default.json",
+
+    "updater": {
+        "question": {
+            "restartnow": "restart now",
+            "restartlater": "restart later"
+        },
+        "title": "AutoUpdateChan =◈~◈=",
+        "message": "Version after download: v{version}",
+        "detail": "Ready to update! Would you like to reboot?"
+    },
+    "debug": {
+        "init": {
+            "app": "init app",
+            "soundcloud": "init main window",
+            "i18n": "init i18n, {locale}",
+            "discord": "init discord rpc",
+            "tray": "init tray",
+            "updater": "init updater"
+        }
+    }
 }

@@ -2,6 +2,7 @@ import fs from 'fs/promises';
 import LicenseChecker from "license-checker-rseidelsohn"
 import { writeFile } from "./writeFile.mjs"
 import config from './config.json' with { type: "json" }
+import data from "../src/i18n/locales/default.json" with { type: "json" }
 
 console.log("BUILD REQUIRED FILES")
 
@@ -33,3 +34,23 @@ for (const [key, license] of Object.entries(licenses)) {
 }
 await fs.writeFile(config.license, JSON.stringify(licenseFiles, null, 2));
 console.log("CREATED FILE:", config.license)
+
+
+console.log("GENERATE i18n SCHEME")
+function convertSchema(obj) {
+    const schema = {}
+    for (const [key, value] of Object.entries(obj)) {
+        if (typeof value === 'object' && value !== null) {
+            schema[key] = convertSchema(value)
+        } else {
+            schema[key] = 'string'
+        }
+    }
+    return schema
+}
+
+const scheme = convertSchema(data)
+
+fs.writeFile("src/i18n/locales/scheme.json", JSON.stringify(scheme, null, 2), "utf-8")
+
+console.log("CREATED FILE:", "src/i18n/locales/scheme.json")

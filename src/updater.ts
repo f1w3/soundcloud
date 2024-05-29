@@ -1,19 +1,21 @@
 import { dialog } from "electron"
 import { autoUpdater } from "electron-updater"
+import { logger } from "./lib/logger"
+import { translate as $, key } from "./i18n/loader"
 
 class AppUpdater {
     interval: NodeJS.Timeout | undefined
     value: number = 60000 * 15
 
     constructor() {
-        console.log("init updater")
+        logger.debug($(key.debug.init.updater))
         autoUpdater.on("update-downloaded", (event) => {
             dialog.showMessageBox({
                 type: "question",
-                buttons: ['今すぐ再起動', 'また後で再起動'],
-                title: "自動アップデート君 ^. .^",
-                message: `ダウンロード後のバージョン: v${event.version}`,
-                detail: 'アップデートの準備が完了しました！再起動しますか？',
+                buttons: [$(key.updater.question.restartnow), $(key.updater.question.restartlater)],
+                title: $(key.updater.title),
+                message: $(key.updater.message, { version: event.version }),
+                detail: $(key.updater.detail),
             }).then((returnValue) => {
                 if (returnValue.response === 0) autoUpdater.quitAndInstall()
             })

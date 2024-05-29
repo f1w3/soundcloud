@@ -6,10 +6,13 @@ import DarkModeCSS from "@/theme/dark";
 import { getTracks } from "@/lib/getInfo";
 
 import { discord } from "@/discord";
+import { logger } from "../../lib/logger"
+import { translate as $, key } from "../../i18n/loader"
 class SoundCloud extends Instance {
     interval: NodeJS.Timeout | undefined
     insertedList: string[] = []
     constructor(name: string, options?: BrowserWindowConstructorOptions) {
+        logger.debug($(key.debug.init.soundcloud))
         const store = new Store()
 
         super(name, {

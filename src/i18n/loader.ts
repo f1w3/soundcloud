@@ -4,12 +4,23 @@ import { createI18n, createI18nKeys } from '@/i18n/i18n';
 
 import { locales } from "./locales";
 
+import { app } from "electron";
+
+import { logger } from "../lib/logger";
+
 export const key = createI18nKeys(scheme)
 
-export function loadI18n(locale: string): I18n {
+function loadI18n(locale: string): I18n {
     const translations: Translations | undefined = locales[locale];
     if (!translations) {
-        return createI18n(locales.default, locale);
+        const i18n = createI18n(locales.default, locale);
+        logger.debug(i18n.translate(key.debug.init.i18n, { locale: locale }))
+        return i18n
     }
-    return createI18n(translations, locale);
+    const i18n = createI18n(translations, locale);
+    logger.debug(i18n.translate(key.debug.init.i18n, { locale: locale }))
+    return i18n
 }
+
+export const i18n = loadI18n(app.getLocale())
+export const translate = i18n.translate

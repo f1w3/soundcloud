@@ -1,11 +1,14 @@
 import { app, Menu, dialog, Tray } from "electron"
 import { soundcloud } from "./instances/soundcloud"
 import { trayIcon } from "./icons"
+import { logger } from "./lib/logger"
+import { translate as $, key } from "./i18n/loader"
 
 class AppTray {
     tray: Tray | undefined
 
     constructor() {
+        logger.debug($(key.debug.init.tray))
         this.tray = new Tray(trayIcon)
         const contextMenu = Menu.buildFromTemplate([
             {

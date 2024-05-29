@@ -1,3 +1,23 @@
 {
-    "test": "テストメッセージ"
+    "_": "ja.locale.json",
+
+    "updater": {
+        "question": {
+            "restartnow": "今すぐ再起動",
+            "restartlater": "また後で再起動"
+        },
+        "title": "自動アップデート君 =◈~◈=",
+        "message": "ダウンロード後のバージョン: v{version}",
+        "detail": "アップデートの準備が完了しました！再起動しますか？"
+    },
+    "debug": {
+        "init": {
+            "app": "アプリを初期化中です",
+            "soundcloud": "メインウィンドウを初期化しています",
+            "i18n": "i18nを{locale}で初期化しました",
+            "discord": "Discord RPCを初期化しています",
+            "tray": "トレイを初期化します",
+            "updater": "自動アップデートを開始します"
+        }
+    }
 }

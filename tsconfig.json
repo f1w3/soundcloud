@@ -12,10 +12,9 @@
         "baseUrl": "src/",
         "paths": {
             "@/*": ["*"],
-            "@locales/*": ["i18n/locales/*"]
+            "@locales/*": ["i18n/locales/*"],
+            "@instance/*": ["instances/*/index.ts"]
         }
     },
-    "include": [
-        "src/**/*"
-    ]
+    "include": ["src/**/*"]
 }

@@ -1,12 +1,14 @@
 import { Client } from "discord-rpc"
 import { Track } from "@/types/track"
 import { truncateString } from "@/lib/truncateString"
+import { logger } from "./lib/logger"
+import { translate as $, key } from "./i18n/loader"
 
 class Discord {
     private readonly id: string = "1231582371581657160"
     private rpc: Client
     constructor() {
-        console.log("init discord rpc");
+        logger.debug($(key.debug.init.discord))
         this.rpc = new Client({ transport: "ipc" })
         this.rpc.login({ clientId: this.id }).catch(console.error)
     }

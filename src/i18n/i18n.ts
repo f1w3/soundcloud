@@ -94,7 +94,6 @@ export function createI18n(translations: Translations, localeName: string): I18n
     function translate(key: string, params?: Record<string, string>): string {
         const translation = getTranslation(key);
         if (!params) return translation;
-
         return translation.replace(paramRegex, (_, key) => params[key] || key);
     }
 

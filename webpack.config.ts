@@ -1,5 +1,6 @@
 import path from "path";
 import WebPackShellPlugin from "webpack-shell-plugin-next";
+import TsconfigPathsPlugin from "tsconfig-paths-webpack-plugin"
 import type { Configuration } from "webpack";
 
 const config: Configuration = {
@@ -8,9 +9,16 @@ const config: Configuration = {
         ignored: [
             "**/dark.ts",
             "**/getInfo.ts",
-            "**/node_modules"
+            "**/node_modules",
+            "**/scheme.json"
         ]
     },
+    ignoreWarnings: [
+        {
+            module: /log4js/,
+            message: /Critical dependency: the request of a dependency is an expression/,
+        },
+    ],
     target: "electron-main",
     entry: "./src/main.ts",
     stats: 'minimal',
@@ -22,13 +30,14 @@ const config: Configuration = {
         filename: "main.js",
     },
     resolve: {
-        alias: {
-            '@': path.resolve(__dirname, 'src/'),
-            '@locales': path.resolve(__dirname, 'src/i18n/locales/'),
-        },
         extensions: [
             '.ts', '.js', '.json'
         ],
+        plugins: [
+            new TsconfigPathsPlugin({
+                logLevel: "INFO"
+            })
+        ]
     },
     module: {
         rules: [
