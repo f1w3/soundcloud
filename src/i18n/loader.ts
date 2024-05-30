@@ -6,7 +6,7 @@ import { locales } from "./locales";
 
 import { app } from "electron";
 
-import { logger } from "../lib/logger";
+import { logger } from "@log4js"
 
 export const key = createI18nKeys(scheme)
 

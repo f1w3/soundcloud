@@ -1,14 +1,13 @@
-import log4js from "log4js";
 import path from "path";
 
-const logDirectory = path.join(process.cwd(), "logs");
+const logDirectory = path.join(process.cwd(), "logs")
 
 const logLayout = {
     type: "pattern",
     pattern: "[%r] [%p] [%z] %m",
-};
+}
 
-log4js.configure({
+export const config = {
     appenders: {
         console: {
             type: "console",
@@ -28,6 +27,4 @@ log4js.configure({
             level: "all"
         }
     }
-});
-
-export const logger = log4js.getLogger();
+}

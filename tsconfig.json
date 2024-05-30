@@ -13,8 +13,12 @@
         "paths": {
             "@/*": ["*"],
             "@locales/*": ["i18n/locales/*"],
-            "@instance/*": ["instances/*/index.ts"]
-        }
+            "@instance/*": ["instances/*/index.ts"],
+            "@discord": ["discord/index.ts"],
+            "@log4js": ["logger/index.ts"],
+            "@i18n": ["i18n/loader.ts"]
+        },
+        "plugins": [{ "name": "typescript-plugin-css-modules" }]
     },
     "include": ["src/**/*"]
 }

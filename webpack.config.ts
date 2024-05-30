@@ -31,7 +31,7 @@ const config: Configuration = {
     },
     resolve: {
         extensions: [
-            '.ts', '.js', '.json'
+            '.ts', '.js', '.json', '.css'
         ],
         plugins: [
             new TsconfigPathsPlugin({
@@ -54,12 +54,16 @@ const config: Configuration = {
                 type: 'javascript/auto',
                 loader: 'json-loader',
             },
+            {
+                test: /\.css/,
+                use: ['to-string-loader', 'css-loader']
+            }
         ],
     },
     plugins: [
         new WebPackShellPlugin({
             onBuildStart: {
-                scripts: ['node script/clear.mjs && node --no-warnings=ExperimentalWarning script/build.mjs'],
+                scripts: ['node script/clear.mjs && node script/license.mjs && node --no-warnings=ExperimentalWarning script/build.mjs'],
                 blocking: true,
                 parallel: false
             },

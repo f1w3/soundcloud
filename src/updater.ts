@@ -1,7 +1,7 @@
 import { dialog } from "electron"
 import { autoUpdater } from "electron-updater"
-import { logger } from "./lib/logger"
-import { translate as $, key } from "./i18n/loader"
+import { logger } from "@log4js"
+import { translate as $, key } from "@i18n"
 
 class AppUpdater {
     interval: NodeJS.Timeout | undefined

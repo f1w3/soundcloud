@@ -1,8 +1,4 @@
-/*
-AUTOMATICALLY GENERATED FILE
-*/
-
-export default `body {
+body {
     background-color: #0b0c0c !important;
     color: #fff !important;
     background-image: unset !important;
@@ -26,18 +22,18 @@ export default `body {
 .repeatControl.m-none {
     filter: invert(100%) !important;
 }
-.volume[data-level="6"] .volume__button,
-.volume[data-level="7"] .volume__button,
-.volume[data-level="8"] .volume__button,
-.volume[data-level="9"] .volume__button,
-.volume[data-level="10"] .volume__button {
+.volume[data-level='6'] .volume__button,
+.volume[data-level='7'] .volume__button,
+.volume[data-level='8'] .volume__button,
+.volume[data-level='9'] .volume__button,
+.volume[data-level='10'] .volume__button {
     filter: invert(100%) !important;
 }
-.volume[data-level="1"] .volume__button,
-.volume[data-level="2"] .volume__button,
-.volume[data-level="3"] .volume__button,
-.volume[data-level="4"] .volume__button,
-.volume[data-level="5"] .volume__button {
+.volume[data-level='1'] .volume__button,
+.volume[data-level='2'] .volume__button,
+.volume[data-level='3'] .volume__button,
+.volume[data-level='4'] .volume__button,
+.volume[data-level='5'] .volume__button {
     filter: invert(100%) !important;
 }
 .volume.muted .volume__button {
@@ -151,9 +147,9 @@ input {
 }
 .g-dark textarea,
 .g-dark select,
-.g-dark input[type="text"],
-.g-dark input[type="password"],
-.g-dark input[type="search"] {
+.g-dark input[type='text'],
+.g-dark input[type='password'],
+.g-dark input[type='search'] {
     color: #ccc !important;
 }
 .g-tabs {
@@ -432,18 +428,10 @@ input {
     background-color: black !important;
 }
 .trackItem:not(.m-disabled).hover .trackItem__additional {
-    background: linear-gradient(
-        to right,
-        rgba(11, 12, 12, 0.1),
-        black 17px
-    ) !important;
+    background: linear-gradient(to right, rgba(11, 12, 12, 0.1), black 17px) !important;
 }
 .trackItem:not(.m-disabled).active .trackItem__additional {
-    background: linear-gradient(
-        to right,
-        rgba(11, 12, 12, 0.1),
-        black 17px
-    ) !important;
+    background: linear-gradient(to right, rgba(11, 12, 12, 0.1), black 17px) !important;
 }
 .sc-snippet-badge-small {
     filter: invert(100%) !important;
@@ -518,12 +506,8 @@ input {
 .dashbox__bodyLine {
     color: #ccc !important;
 } /* Fixes dark text in dashbox (2/2) */
-.truncatedUserDescription.m-overflow.m-collapsed
-    .truncatedUserDescription__wrapper::after {
-    background: linear-gradient(
-        rgba(255, 255, 255, 0),
-        rgba(255, 255, 255, 0.1)
-    ) !important;
+.truncatedUserDescription.m-overflow.m-collapsed .truncatedUserDescription__wrapper::after {
+    background: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.1)) !important;
 } /* Gradient in truncated user description */
 .visualSound__wrapper {
     background-color: #161719 !important;
@@ -745,8 +729,7 @@ a.sc-link-light {
     border: none !important;
 }
 
-.playbackSoundBadge__showQueue
-    > .sc-button-small.sc-button-icon:not(.sc-button-stretch-icon),
+.playbackSoundBadge__showQueue > .sc-button-small.sc-button-icon:not(.sc-button-stretch-icon),
 .sc-button-small.sc-button-responsive:not(.sc-button-stretch-icon) {
     border: none !important;
 }
@@ -812,4 +795,3 @@ a.sc-link-light {
 .modal__modal {
     background-color: white !important;
 }
-`

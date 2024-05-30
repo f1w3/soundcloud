@@ -1,8 +1,8 @@
 import { Client } from "discord-rpc"
 import { Track } from "@/types/track"
-import { truncateString } from "@/lib/truncateString"
-import { logger } from "./lib/logger"
-import { translate as $, key } from "./i18n/loader"
+import { truncateString } from "./truncate"
+import { logger } from "@log4js"
+import { translate as $, key } from "@i18n"
 
 class Discord {
     private readonly id: string = "1231582371581657160"

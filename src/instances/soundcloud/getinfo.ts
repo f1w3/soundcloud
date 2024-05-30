@@ -1,12 +1,8 @@
-/*
-AUTOMATICALLY GENERATED FILE
-*/
+import type { BrowserWindow } from "electron"
+import { Track } from "@/types/track"
 
-/**
- * Retrieves information about the currently playing track on the page.
- * @returns {Promise<string>} A JSON string containing the title, author, artwork URL, and URL of the currently playing track.
- */
-export const getTracks = `new Promise(resolve => {
+const execute = `
+new Promise(resolve => {
     const playEl = document.querySelector('.playControls__play');
     const titleEl = document.querySelector('.playbackSoundBadge__titleLink');
     const authorEl = document.querySelector('.playbackSoundBadge__lightLink');
@@ -22,4 +18,11 @@ export const getTracks = `new Promise(resolve => {
     })(titleEl.href);
     const content = { title: title, author: author, artwork: artwork, url: url };
     resolve(JSON.stringify(content));
-});`
+});
+`
+
+export const getTracks = async (window: BrowserWindow): Promise<Track | undefined> => {
+    const result = await window.webContents.executeJavaScript(execute)
+    if (result == "undefined") return undefined
+    return JSON.parse(result)
+}

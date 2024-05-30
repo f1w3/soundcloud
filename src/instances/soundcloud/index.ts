@@ -1,13 +1,12 @@
 import { shell, BrowserWindowConstructorOptions, app } from "electron"
 import Store from "electron-store";
+import { Instance } from "@/instances/instance"
+import DarkModeCSS from "./theme/dark.css"
+import { getTracks } from "./getinfo.ts"
+import { discord } from "@/discord"
+import { logger } from "@log4js"
+import { translate as $, key } from "@i18n"
 
-import { Instance } from "@/instances/instance";
-import DarkModeCSS from "@/theme/dark";
-import { getTracks } from "@/lib/getInfo";
-
-import { discord } from "@/discord";
-import { logger } from "../../lib/logger"
-import { translate as $, key } from "../../i18n/loader"
 class SoundCloud extends Instance {
     interval: NodeJS.Timeout | undefined
     insertedList: string[] = []
@@ -66,12 +65,12 @@ class SoundCloud extends Instance {
             if (!this.interval) {
                 this.interval = setInterval(async () => {
                     if (!this.window) return
-                    const trackInfo = await this.window.webContents.executeJavaScript(getTracks);
-                    if (trackInfo.trim() == "undefined") {
+                    const trackInfo = await getTracks(this.window);
+                    if (!trackInfo) {
                         discord.clear()
                         return;
                     }
-                    discord.set(JSON.parse(trackInfo))
+                    discord.set(trackInfo)
                 }, 5000)
             }
         })

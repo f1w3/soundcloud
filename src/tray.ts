@@ -1,8 +1,8 @@
 import { app, Menu, dialog, Tray } from "electron"
 import { soundcloud } from "./instances/soundcloud"
 import { trayIcon } from "./icons"
-import { logger } from "./lib/logger"
-import { translate as $, key } from "./i18n/loader"
+import { logger } from "@log4js"
+import { translate as $, key } from "@i18n"
 
 class AppTray {
     tray: Tray | undefined
