@@ -8,7 +8,13 @@
         },
         "title": "AutoUpdateChan =◈~◈=",
         "message": "Version after download: v{version}",
-        "detail": "Ready to update! Would you like to reboot?"
+        "detail": "Ready to update! Would you like to reboot?",
+
+        "devmode": "Developer mode is enabled! Automatic updates are stopped!",
+        "checking": "checking for updates",
+        "available": "Found update (latest version: {version})",
+        "not_available": "There were no updates (latest version: {version})",
+        "cancelled": "Update canceled (latest version: {version})"
     },
     "debug": {
         "init": {

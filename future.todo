@@ -7,7 +7,7 @@
         "todo": {
           "content": "use log4js and save to log.txt",
           "id": 1716642266838,
-          "level": "default",
+          "level": "success",
           "done": false,
           "start": 1716642266838,
           "focus": false,
@@ -32,8 +32,10 @@
           "content": "Implement i18n",
           "id": 1716545539305,
           "level": "default",
-          "done": false,
-          "start": 1716545539305
+          "done": true,
+          "start": 1716545539305,
+          "focus": false,
+          "end": 1717119224688
         }
       },
       {
@@ -73,6 +75,6 @@
     "simpleMode": false,
     "lang": "ja",
     "desc": "List of things this repository will implement in the future",
-    "version": "1716642342089"
+    "version": "1717119224733"
   }
 }

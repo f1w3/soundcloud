@@ -16,7 +16,8 @@
             "@instance/*": ["instances/*/index.ts"],
             "@discord": ["discord/index.ts"],
             "@log4js": ["logger/index.ts"],
-            "@i18n": ["i18n/loader.ts"]
+            "@i18n": ["i18n/loader.ts"],
+            "@env": ["env.ts"]
         },
         "plugins": [{ "name": "typescript-plugin-css-modules" }]
     },

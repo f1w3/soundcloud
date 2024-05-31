@@ -1,6 +1,6 @@
 import { app, Menu, dialog, Tray } from "electron"
 import { soundcloud } from "./instances/soundcloud"
-import { trayIcon } from "./icons"
+import { trayIcon } from "@env"
 import { logger } from "@log4js"
 import { translate as $, key } from "@i18n"
 

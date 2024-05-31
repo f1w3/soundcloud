@@ -7,7 +7,12 @@
     },
     "title": "string",
     "message": "string",
-    "detail": "string"
+    "detail": "string",
+    "devmode": "string",
+    "checking": "string",
+    "available": "string",
+    "not_available": "string",
+    "cancelled": "string"
   },
   "debug": {
     "init": {
