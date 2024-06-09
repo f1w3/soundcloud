@@ -795,3 +795,22 @@ a.sc-link-light {
 .modal__modal {
     background-color: white !important;
 }
+
+.listenArtistInfo .userBadge__actions {
+    border-width: none !important;
+    border-style: none !important;
+    border-color: none !important;
+    border-image: none !important;
+}
+
+.listenArtistInfo .userBadge__actions .sc-button-follow {
+    background-color: transparent !important;
+}
+
+.sc-button-small.sc-button-cta.sc-button-follow:before {
+    filter: invert(0%) !important;
+}
+
+.modal__modal {
+    background-color: #0b0c0c !important;
+}

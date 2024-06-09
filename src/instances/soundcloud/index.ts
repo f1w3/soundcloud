@@ -103,7 +103,7 @@ class SoundCloud extends Instance {
                     if (this.window.webContents.isDevToolsOpened()) {
                         this.window.webContents.closeDevTools()
                     } else {
-                        this.window.webContents.openDevTools()
+                        this.window.webContents.openDevTools({ mode: "undocked" })
                     }
                 }
                 event.preventDefault()

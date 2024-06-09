@@ -42,11 +42,8 @@ const config: Configuration = {
     module: {
         rules: [
             {
-                // ローダーの処理対象ファイル
                 test: /\.ts$/,
-                // 利用するローダー
                 use: 'babel-loader',
-                // ローダーの処理対象から外すディレクトリ
                 exclude: /node_modules/
             },
             {
@@ -57,7 +54,11 @@ const config: Configuration = {
             {
                 test: /\.css/,
                 use: ['to-string-loader', 'css-loader']
-            }
+            },
+            {
+                test: /\.(png|jpe?g|gif)$/i,
+                use: 'url-loader'
+            },
         ],
     },
     plugins: [

@@ -1,6 +1,6 @@
 import { app, nativeImage } from "electron";
-import path from "path"
+import icon from "@/images/soundcloud.png"
 
 export const isDev = () => !app.isPackaged
 
-export const trayIcon = nativeImage.createFromPath(path.join(__dirname, "../static/soundcloud.png"))
+export const trayIcon = nativeImage.createFromDataURL(icon)
