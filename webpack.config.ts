@@ -31,7 +31,7 @@ const config: Configuration = {
     },
     resolve: {
         extensions: [
-            '.ts', '.js', '.json', '.css'
+            '.ts', '.js', '.json', '.css', 'html'
         ],
         plugins: [
             new TsconfigPathsPlugin({
@@ -43,8 +43,12 @@ const config: Configuration = {
         rules: [
             {
                 test: /\.ts$/,
-                use: 'babel-loader',
-                exclude: /node_modules/
+                exclude: /node_modules/,
+                use: [
+                    {
+                        loader: 'babel-loader'
+                    }
+                ],
             },
             {
                 test: /\.json$/,
@@ -53,13 +57,30 @@ const config: Configuration = {
             },
             {
                 test: /\.css/,
-                use: ['to-string-loader', 'css-loader']
+                use: [
+                    {
+                        loader: "to-string-loader",
+                    },
+                    {
+                        loader: "css-loader",
+                    },
+                ],
             },
             {
                 test: /\.(png|jpe?g|gif)$/i,
                 use: 'url-loader'
             },
+            {
+                test: /\.html/,
+                type: 'asset/source'
+            }
         ],
+    },
+    cache: {
+        type: "filesystem",
+        buildDependencies: {
+            config: [__filename]
+        }
     },
     plugins: [
         new WebPackShellPlugin({
@@ -73,7 +94,7 @@ const config: Configuration = {
                 blocking: true,
                 parallel: false
             }
-        })
+        }),
     ],
 }
 

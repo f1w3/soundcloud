@@ -1,0 +1,36 @@
+body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    margin: 0;
+    background: transparent;
+    overflow: hidden;
+}
+.shortcut {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    padding: 20px;
+    -webkit-app-region: drag;
+    overflow: hidden;
+}
+.shortcut h2 {
+    margin-top: 0;
+}
+.shortcut ul {
+    list-style-type: none;
+    padding: 0;
+}
+.shortcut li {
+    margin-bottom: 10px;
+}
+.key {
+    font-weight: bold;
+    padding: 4px 8px;
+    background-color: #eee;
+    border-radius: 4px;
+    margin-right: 4px;
+}
+.key-info {
+    margin-left: 10px;
+}

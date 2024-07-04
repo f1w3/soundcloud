@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    </head>
+    <body>
+        <div class="custom-notification-container"></div>
+        <script>
+            function createNotification(title, imageUrl, isDarkmode = true) {
+                const notificationContainer = document.querySelector(
+                    '.custom-notification-container',
+                );
+                const notification = document.createElement('div');
+                notification.classList.add('custom-notification');
+                notification.style.color = isDarkmode ? '#ffffff' : '#000000';
+                notification.style.backgroundColor = isDarkmode ? '#000000' : '#ffffff';
+                const notificationContent = document.createElement('div');
+                notificationContent.classList.add('notification-content');
+                const notificationTitle = document.createElement('div');
+                notificationTitle.classList.add('notification-title');
+                notificationTitle.textContent = title;
+                const notificationImage = document.createElement('div');
+                notificationImage.classList.add('notification-image');
+                const img = document.createElement('img');
+                img.src = imageUrl;
+                img.alt = 'Notification Image';
+                notificationImage.appendChild(img);
+                notificationContent.appendChild(notificationImage);
+                notificationContent.appendChild(notificationTitle);
+                notification.appendChild(notificationContent);
+                notificationContainer.appendChild(notification);
+                setTimeout(() => {
+                    notification.remove();
+                }, 3500);
+            }
+        </script>
+    </body>
+</html>

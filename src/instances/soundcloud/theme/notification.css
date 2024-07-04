@@ -1,0 +1,43 @@
+.custom-notification-container {
+    position: fixed;
+    top: 56px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    z-index: 999;
+}
+
+.custom-notification {
+    color: #fff;
+    padding: 15px 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border-style: solid;
+    border-width: 1px;
+    z-index: 9999;
+    width: fit-content;
+    opacity: 0;
+    transform: translateX(100%);
+    animation:
+        custom-notification-slideIn 0.5s forwards,
+        custom-notification-fadeOut 0.5s 3s forwards;
+}
+
+@keyframes custom-notification-slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes custom-notification-fadeOut {
+    to {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
